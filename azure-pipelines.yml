@@ -4,6 +4,7 @@ pool:
 variables:
   buildConfiguration: 'Release'
   dotnetSdkVersion: '5.x'
+  group: VariableGroup1
 
 steps:
 - task: UseDotNet@2
