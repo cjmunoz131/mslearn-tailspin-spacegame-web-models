@@ -18,6 +18,13 @@ steps:
     command: 'restore'
     projects: '**/*.csproj'
 
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      echo $(myname)
+
 - task: DotNetCoreCLI@2
   displayName: 'Build the project - $(buildConfiguration)'
   inputs:
