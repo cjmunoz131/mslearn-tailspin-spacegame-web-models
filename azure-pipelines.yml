@@ -24,13 +24,25 @@ steps:
     script: |
       # Write your commands here
       echo $(myname)
-
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloudSC'
+    organization: 'cjmunoz131'
+    scannerMode: 'MSBuild'
+    projectKey: 'sonar-cjmm'
+    projectName: 'sonar-project'
 - task: DotNetCoreCLI@2
   displayName: 'Build the project - $(buildConfiguration)'
   inputs:
     command: 'build'
     arguments: '--no-restore --configuration $(buildConfiguration)'
     projects: '**/*.csproj'
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
 
 - task: DotNetCoreCLI@2
   displayName: 'Pack the project - $(buildConfiguration)'
